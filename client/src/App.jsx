@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import {BrowserRouter, Routes ,Route,Navigate, Router} from 'react-router-dom'
-import Chat from '../Components/Chat/Chat'
+import Chat from './components/Chat'
 
 function App() {
-
-
   return (
     <>
       <div className='app'>
