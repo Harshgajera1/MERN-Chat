@@ -1,7 +1,8 @@
 import React from 'react'
 import {useMultiChatLogic, MultiChatSocket, MultiChatWindow} from 'react-chat-engine-advanced'
 import Header from './CustomHeader'
-import StandardMessageForm from './StandardMessageForm'
+import StandardMessageForm from './customMessageForms/StandardMessageForm'
+import Ai from './customMessageForms/Ai'
 
 const Chat = () => {
   // Connect a Hook to the Server
@@ -21,11 +22,13 @@ const Chat = () => {
         {...chatProps} 
         style={{height:'100vh'}}
         renderChatHeader={(chat)=><Header chat={chat}/>}
-        renderMessageForm={(props)=> 
-          <StandardMessageForm 
-            props={props}
-            activeChat={chatProps.chat}
-          />}
+        renderMessageForm={(props)=> {
+          if(chatProps.chat?.title.startsWith("AiChat_")){
+            return <Ai props={props} activeChat={activeChat} />
+          }
+          
+          return <StandardMessageForm props={props} activeChat={chatProps.chat} />}
+        }
       />
     </div>
   )
