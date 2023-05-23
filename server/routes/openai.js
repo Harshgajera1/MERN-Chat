@@ -5,7 +5,7 @@ import dotenv from "dotenv"
 dotenv.config()
 const router = express.Router()
 
-router.post('/test',async (req,res) =>{
+router.post('/text',async (req,res) =>{
     try {
         const {text, activeChatId} = req.body
         console.log('text',text)
@@ -19,6 +19,21 @@ router.post('/test',async (req,res) =>{
             frequency_penalty: 0.5,
             presence_penalty: 0,
           });
+
+          console.log('FFFFF',response,req.body)
+
+        await axios.post(
+            `https://api.chatengine.io/chats/${activeChatId}/messages/`,
+            { text: response.data.choices[0].text },
+            {
+                headers: {
+                  "Project-ID": process.env.PROJECT_ID,
+                  "User-Name": process.env.BOT_USER_NAME,
+                  "User-Secret": process.env.BOT_USER_SECRET,
+                },
+              }
+
+        )
           
         res.status(200).json({text})
 

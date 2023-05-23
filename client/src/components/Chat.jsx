@@ -3,6 +3,7 @@ import {useMultiChatLogic, MultiChatSocket, MultiChatWindow} from 'react-chat-en
 import Header from './CustomHeader'
 import StandardMessageForm from './customMessageForms/StandardMessageForm'
 import Ai from './customMessageForms/Ai'
+import AiCode from './customMessageForms/AiCode'
 
 const Chat = () => {
   // Connect a Hook to the Server
@@ -25,6 +26,9 @@ const Chat = () => {
         renderMessageForm={(props)=> {
           if(chatProps.chat?.title.startsWith("AiChat_")){
             return <Ai props={props} activeChat={activeChat} />
+          }
+          if(chatProps.chat?.title.startsWith("AiCode_")){
+
           }
           
           return <StandardMessageForm props={props} activeChat={chatProps.chat} />}
